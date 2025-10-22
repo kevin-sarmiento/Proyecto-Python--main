@@ -17,6 +17,7 @@ ALLOWED_HOSTS = ['*']
 
 # Aplicaciones instaladas
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -24,14 +25,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+# Dependencias del admin interface
+    'colorfield',
+    'admin_interface',
 
     # Apps del proyecto
     'users',
     'products',
     'cart',
     'chatbot',
-]
 
+]
+X_FRAME_OPTIONS = "SAMEORIGIN"
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
