@@ -1,0 +1,436 @@
+/* === ESTILO GENERAL DE LUJO EN NEGRO Y DORADO === */
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b0b0b;
+    color: #f5f3e7;
+    transition: all 0.4s ease;
+    letter-spacing: 0.3px;
+}
+
+/* === HERO SECTION === */
+.hero-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), url('/static/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* === NAVBAR === */
+.navbar {
+    background: linear-gradient(180deg, #151515, #0b0b0b);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.6rem;
+    background: linear-gradient(90deg, #d4af37, #ffdf80);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+}
+
+/* === FOOTER === */
+.footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+    background-color: #0a0a0a;
+    text-align: center;
+    color: #c7b26a;
+}
+
+/* === BOTONES === */
+.btn-primary {
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    border: none;
+    color: #000;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.6rem 1.4rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.4px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #ffdf80, #d4af37);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+/* === PRODUCTOS === */
+.product-card {
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #141414, #1b1b1b);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 215, 0, 0.08);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.product-image {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-badge,
+.product-badge-large {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(45deg, #ffdf80, #d4af37);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.product-badge-large {
+    font-size: 1rem;
+    padding: 8px 15px;
+}
+
+.price {
+    font-size: 1.2rem;
+    color: #ffdf80;
+    font-weight: 600;
+}
+
+/* === CATEGORÍAS === */
+.category-card {
+    transition: all 0.4s ease;
+    text-align: center;
+    background: linear-gradient(180deg, #151515, #1a1a1a);
+    border: 1px solid rgba(255, 215, 0, 0.05);
+    border-radius: 10px;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+}
+
+.category-image {
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+}
+
+/* === FEATURES === */
+.features-section {
+    padding: 3rem 0;
+    background: rgba(20, 20, 20, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.05);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #d4af37, #ffdf80);
+    border-radius: 50%;
+    color: #000;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
+/* === CTA BANNER === */
+.cta-banner {
+    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), url('/static/images/cta-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    margin-top: 3rem;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* === CHATBOT === */
+.chatbot-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #d4af37, #b8860b);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.chatbot-container {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background-color: #141414;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-header {
+    background: linear-gradient(90deg, #d4af37, #ffdf80);
+    color: #000;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.chatbot-input input {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    color: #fff;
+}
+
+.chatbot-input button {
+    background: linear-gradient(45deg, #d4af37, #b8860b);
+    color: #000;
+}
+
+/* === CARRITO LATERAL === */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0d0d0d, #161616);
+    z-index: 2000;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.6);
+    transition: right 0.3s ease;
+    border-left: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-sidebar-header {
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    color: #000;
+    font-weight: 600;
+    padding: 15px;
+}
+
+.cart-sidebar-footer {
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    color: #ffdf80;
+}
+
+/* === ANIMACIONES === */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.profile-avatar {
+    width: 150px;       /* ancho fijo */
+    height: 150px;      /* alto fijo */
+    object-fit: cover;  /* recorta si no tiene proporción */
+    border-radius: 50%; /* círculo */
+    border: 2px solid #ccc;
+}
+
+/* === ESTILO UNIFICADO DEL FORMULARIO DE PERFIL === */
+
+.styled-profile-form label {
+    color: #ffdf00; /* dorado */
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.styled-profile-form input[type="text"],
+.styled-profile-form input[type="email"],
+.styled-profile-form input[type="tel"],
+.styled-profile-form input[type="password"],
+.styled-profile-form select {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 100%;
+    font-size: 0.95rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.styled-profile-form input:focus,
+.styled-profile-form select:focus {
+    border-color: #ffdf00;
+    box-shadow: 0 0 8px rgba(255, 223, 0, 0.4);
+    outline: none;
+}
+
+/* Botón dorado coherente con tu tema */
+.btn-gold {
+    background: linear-gradient(90deg, #d4af37, #ffdf00);
+    color: #1a1a1a;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background: linear-gradient(90deg, #ffdf00, #d4af37);
+    transform: scale(1.03);
+}
+
+.btn-outline-gold {
+    border: 1px solid #ffdf00;
+    color: #ffdf00;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background-color: #ffdf00;
+    color: #1a1a1a;
+    transform: scale(1.02);
+}
+
+
+  .chatbot-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    z-index: 9999;
+  }
+
+  .chatbot-toggle {
+    background-color: #0078D7;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+  }
+
+  .chatbot-toggle:hover {
+    background-color: #005a9e;
+  }
+
+  .chatbot-container {
+    width: 320px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .chatbot-header {
+    background-color: #0078D7;
+    color: white;
+    padding: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-close {
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .chatbot-messages {
+    padding: 16px;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+  }
+
+  .chatbot-message.bot {
+    background-color: #e1ecf4;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .chatbot-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+
+  .chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .chatbot-input button {
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-left: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .chatbot-input button:hover {
+    background-color: #005a9e;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+

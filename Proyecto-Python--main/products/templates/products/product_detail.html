@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - TecLegacy{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <!-- Breadcrumb -->
+    <div class="col-12 mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'products:index' %}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'products:product_list' %}">Productos</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'products:products_by_category' product.category.slug %}">{{ product.category.name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Imagen del producto -->
+    <div class="col-md-6 mb-4">
+        <div class="product-image-container">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid product-detail-image">
+            {% if product.is_featured %}
+            <div class="product-badge-large">Destacado</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Información del producto -->
+    <div class="col-md-6">
+        <h1 class="product-title text-light">{{ product.name }}</h1>
+
+        <div class="product-price my-3">
+            <span class="h2 text-light">${{ product.price }}</span>
+            {% if product.is_available %}
+                <span class="badge bg-success ms-2">Disponible</span>
+            {% else %}
+                <span class="badge bg-danger ms-2">Agotado</span>
+            {% endif %}
+        </div>
+
+        <div class="product-description my-4 text-light">
+            {{ product.description|linebreaks }}
+        </div>
+
+        {% if product.is_available %}
+    <form id="add-to-cart-form"
+          data-url="{% url 'cart:add_to_cart' product.id %}"
+          method="post"
+          class="add-to-cart-form mb-4">
+        {% csrf_token %}
+
+        <p>
+            <strong>Talla:</strong>
+            <select name="size" id="size-select">
+                <option value="">Seleccione una talla</option>
+                {% for size in product.sizes.all %}
+                <option value="{{ size.id }}">{{ size.name }}</option>
+                {% empty %}
+                <option value="">No hay tallas disponibles</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            <strong>Color:</strong>
+            <select name="color" id="color-select">
+                <option value="">Seleccione un color</option>
+                {% for color in product.colors.all %}
+                <option value="{{ color.id }}">{{ color.name }}</option>
+                {% empty %}
+                <option value="">No hay colores disponibles</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p><strong>Tipo:</strong> {{ product.get_gender_display }}</p>
+
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="quantity-{{ product.id }}" class="col-form-label text-light">Cantidad:</label>
+            </div>
+            <div class="col-auto">
+                <div class="input-group">
+                    <button type="button" class="btn btn-outline-secondary quantity-btn" data-action="decrease">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" id="quantity-{{ product.id }}" name="quantity" class="form-control text-center"
+                           value="1" min="1" max="{{ product.stock }}">
+                    <button type="button" class="btn btn-outline-secondary quantity-btn" data-action="increase">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-cart-plus me-2"></i> Añadir al Carrito
+                </button>
+            </div>
+        </div>
+    </form>
+
+    {% else %}
+        <div class="alert alert-warning">
+            Este producto está temporalmente agotado. Vuelve a revisar más tarde.
+        </div>
+        {% endif %}
+
+        <!-- Información adicional -->
+        <div class="product-meta mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Información del producto</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Categoría:</strong> {{ product.category.name }}</li>
+                        <li><strong>Disponibilidad:</strong> {% if product.is_available %}En stock ({{ product.stock }} disponibles){% else %}Agotado{% endif %}</li>
+                        <li><strong>ID del producto:</strong> #{{ product.id }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Productos relacionados -->
+{% if related_products %}
+<div class="row mt-5">
+    <div class="col-12">
+        <h2 class="text-light mb-4">Productos Relacionados</h2>
+    </div>
+
+    {% for related in related_products %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-100 product-card">
+            <a href="{{ related.get_absolute_url }}">
+                <img src="{{ related.image.url }}" alt="{{ related.name }}" class="card-img-top product-image">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ related.name }}</h5>
+                <p class="card-text text-truncate">{{ related.description|truncatechars:60 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong class="price">${{ related.price }}</strong>
+                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-product-id="{{ related.id }}">
+                        <i class="fas fa-cart-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+
+<style>
+/* Selects con estilo dorado pero texto negro */
+select#size-select,
+select#color-select {
+    padding: 0.6rem 1rem;
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.3); /* borde dorado */
+    background: linear-gradient(180deg, #1a1a1a, #141414); /* fondo oscuro */
+    color: #ffdf00;; /* texto negro */
+    font-weight: 600;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffdf80" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem auto;
+    transition: all 0.3s ease;
+}
+
+select#size-select:focus,
+select#color-select:focus {
+    border-color: #d4af37; /* borde dorado al enfocar */
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    outline: none;
+}
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // ✅ Seleccionamos el input de cantidad específico del producto
+        const quantityInput = document.getElementById('quantity-{{ product.id }}');
+
+        // ✅ Seleccionamos los botones de aumentar/disminuir
+        const increaseBtn = document.querySelector('.quantity-btn[data-action="increase"]');
+        const decreaseBtn = document.querySelector('.quantity-btn[data-action="decrease"]');
+
+        if (quantityInput && increaseBtn && decreaseBtn) {
+            increaseBtn.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value) || 1;
+                const maxStock = parseInt(quantityInput.getAttribute('max')) || 99;
+                if (currentValue < maxStock) {
+                    quantityInput.value = currentValue + 1;
+                }
+            });
+
+            decreaseBtn.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value) || 1;
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+        } else {
+            console.warn("⚠️ No se encontraron los botones o el input de cantidad.");
+        }
+
+        // ✅ Formulario de añadir al carrito
+        const form = document.getElementById('add-to-cart-form');
+        const cartCount = document.getElementById('cart-items-count');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const url = form.dataset.url;
+            const formData = new FormData(form);
+
+            // 🔧 Asegurar que la cantidad actual se envíe correctamente
+            formData.set('quantity', quantityInput.value);
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (cartCount && data.cart_items_count !== undefined) {
+                    cartCount.textContent = data.cart_items_count;
+                }
+
+                const btn = form.querySelector('button[type="submit"]');
+                btn.innerHTML = '<i class="fas fa-check"></i> Añadido!';
+                btn.classList.replace('btn-primary', 'btn-success');
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-cart-plus me-2"></i> Añadir al Carrito';
+                    btn.classList.replace('btn-success', 'btn-primary');
+                }, 1500);
+            } else {
+                alert("⚠️ Ocurrió un error al añadir el producto al carrito.");
+            }
+        });
+    });
+</script>
+
+
+
+{% endblock %}
